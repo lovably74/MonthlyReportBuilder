@@ -1,0 +1,21 @@
+[package]
+name = "cm-monthly-report"
+version = "0.1.0"
+description = "CM 월간보고서 AI 자동취합 데스크톱 앱"
+authors = ["CM Report Team"]
+edition = "2021"
+
+[lib]
+name = "cm_monthly_report_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+mdns-sd = "0.11"
+tokio = { version = "1", features = ["rt"] }

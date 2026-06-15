@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+*.spec.bak
+
+# Server data (runtime generated)
+server/data/
+
+# Node
+node_modules/
+client/dist/
+
+# Rust / Tauri build
+client/src-tauri/target/
+
+# Installer build artifacts
+installer/dist/
+installer/output/
+installer/tools/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Hypothesis database
+.hypothesis/
+
+# pytest cache
+.pytest_cache/
+
+# Alembic temp
+*.db-journal
