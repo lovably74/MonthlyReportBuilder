@@ -6,7 +6,7 @@ import { useConnectionStore } from './stores/connectionStore';
 const DEFAULT_SERVER_URL = 'http://localhost:8741';
 
 function App() {
-  const { serverUrl, setServerInfo, startHealthCheck } = useConnectionStore();
+  const { setServerInfo, startHealthCheck } = useConnectionStore();
 
   useEffect(() => {
     // 앱 시작 시 서버 연결 초기화
