@@ -27,16 +27,16 @@ function App() {
 
       // mDNS 실패 시 localhost로 fallback
       if (!discovered) {
-        // localhost에서 Server-ID를 가져오기 시도
         try {
           const response = await fetch(`${DEFAULT_SERVER_URL}/health`, { signal: AbortSignal.timeout(3000) });
           if (response.ok) {
-            // Server-ID는 첫 API 호출 시 헤더에서 확인 — 임시로 빈값 설정
-            setServerInfo(DEFAULT_SERVER_URL, 'local');
+            const data = await response.json();
+            const serverId = data.server_id || 'unknown';
+            setServerInfo(DEFAULT_SERVER_URL, serverId);
           }
         } catch {
-          // localhost도 응답 없음 — disconnected 상태로 유지
-          setServerInfo(DEFAULT_SERVER_URL, 'local');
+          // localhost도 응답 없음 — URL만 설정하고 health check에서 재시도
+          setServerInfo(DEFAULT_SERVER_URL, 'pending');
         }
       }
 

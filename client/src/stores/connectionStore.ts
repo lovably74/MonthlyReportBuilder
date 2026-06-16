@@ -80,6 +80,14 @@ export const useConnectionStore = create<ConnectionStore>((set, get) => ({
         const now = new Date().toISOString();
         const wasDisconnected = get().status !== 'connected' || previousStatus === 'disconnected' || previousStatus === 'connecting';
 
+        // health 응답에서 server_id를 추출하여 갱신
+        try {
+          const data = await response.json();
+          if (data.server_id && get().serverId !== data.server_id) {
+            set({ serverId: data.server_id });
+          }
+        } catch { /* json 파싱 실패 무시 */ }
+
         set({ status: 'connected', lastPingAt: now });
 
         // Emit reconnection event when transitioning from disconnected/connecting to connected

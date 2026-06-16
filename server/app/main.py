@@ -75,8 +75,9 @@ app.include_router(profile_router)
 
 @app.get("/health")
 async def health_check() -> dict[str, str]:
-    """서버 상태 확인 엔드포인트."""
-    return {"status": "ok"}
+    """서버 상태 확인 엔드포인트. Server-ID도 함께 반환."""
+    from app.core.server_identity import get_server_id
+    return {"status": "ok", "server_id": get_server_id()}
 
 
 def main() -> None:
