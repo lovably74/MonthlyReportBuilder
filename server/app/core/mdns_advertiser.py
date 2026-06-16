@@ -18,8 +18,8 @@ from app.core.server_identity import get_server_id
 logger = logging.getLogger(__name__)
 
 # Service type for mDNS advertisement
-SERVICE_TYPE = "_cm-report-server._tcp.local."
-SERVICE_NAME = "CM Report Server._cm-report-server._tcp.local."
+SERVICE_TYPE = "_cmreport._tcp.local."
+SERVICE_NAME = "CMReport._cmreport._tcp.local."
 
 # App version (sourced from pyproject.toml metadata)
 APP_VERSION = "0.1.0"

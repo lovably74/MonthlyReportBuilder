@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use std::time::Duration;
 
 /// mDNS 서비스 타입 상수
-const SERVICE_TYPE: &str = "_cm-report-server._tcp.local.";
+const SERVICE_TYPE: &str = "_cmreport._tcp.local.";
 
 /// mDNS 탐색 기본 타임아웃 (초)
 const DISCOVERY_TIMEOUT_SECS: u64 = 5;

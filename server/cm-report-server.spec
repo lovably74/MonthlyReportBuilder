@@ -1,20 +1,22 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_all
 
-datas = [('alembic', 'alembic'), ('alembic.ini', '.')]
+datas = [('alembic', 'alembic'), ('alembic.ini', '.'), ('app', 'app')]
 binaries = []
-hiddenimports = ['aiosqlite', 'sqlalchemy.dialects.sqlite', 'uvicorn.logging', 'uvicorn.loops.auto', 'uvicorn.protocols.http.auto', 'uvicorn.protocols.websockets.auto', 'uvicorn.lifespan.on']
+hiddenimports = ['aiosqlite', 'sqlalchemy.dialects.sqlite', 'uvicorn.logging', 'uvicorn.loops.auto', 'uvicorn.loops.asyncio', 'uvicorn.protocols.http.auto', 'uvicorn.protocols.http.h11_impl', 'uvicorn.protocols.websockets.auto', 'uvicorn.lifespan.on', 'uvicorn.lifespan.off', 'app', 'app.main', 'app.core', 'app.core.database', 'app.core.server_identity', 'app.core.mdns_advertiser', 'app.core.auth', 'app.core.error_handlers', 'app.core.exceptions', 'app.models', 'app.models.settings_profile', 'app.schemas', 'app.schemas.profile', 'app.repositories', 'app.repositories.profile_repository', 'app.services', 'app.services.profile_service', 'app.routers', 'app.routers.profile_router']
 tmp_ret = collect_all('zeroconf')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 tmp_ret = collect_all('uvicorn')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 tmp_ret = collect_all('fastapi')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
+tmp_ret = collect_all('pydantic')
+datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 
 
 a = Analysis(
     ['app\\main.py'],
-    pathex=[],
+    pathex=['.'],
     binaries=binaries,
     datas=datas,
     hiddenimports=hiddenimports,
