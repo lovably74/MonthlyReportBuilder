@@ -98,8 +98,8 @@ pub fn discover_servers_sync(timeout_secs: Option<u64>) -> Result<Vec<Discovered
                     }
                 }
             }
-            Err(std::sync::mpsc::RecvTimeoutError::Timeout) => break,
-            Err(std::sync::mpsc::RecvTimeoutError::Disconnected) => break,
+            Err(flume::RecvTimeoutError::Timeout) => break,
+            Err(flume::RecvTimeoutError::Disconnected) => break,
         }
     }
 

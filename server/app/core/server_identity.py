@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 # Default path for the server_id.json file
-_DEFAULT_DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
+from app.core.database import DATA_DIR as _DEFAULT_DATA_DIR
 _DEFAULT_SERVER_ID_FILE = _DEFAULT_DATA_DIR / "server_id.json"
 
 # Module-level cache for the Server-ID

@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { ConnectionStatus, useIsDisconnected } from "./ConnectionStatus";
 import { DisconnectedBanner } from "./DisconnectedBanner";
 import { useConnectionStore } from "@/stores/connectionStore";
-import React from "react";
 
 // Helper to set store state directly
 function setConnectionStatus(status: "connected" | "disconnected" | "connecting") {

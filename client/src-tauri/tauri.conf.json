@@ -1,15 +1,23 @@
 {
   "productName": "CM Monthly Report",
   "version": "0.1.0",
-  "identifier": "com.cm-report.app",
+  "identifier": "com.cmreport.desktop",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "embedBootstrapper"
+      }
+    }
+  },
   "app": {
-    "title": "CM 월간보고서 자동취합",
     "windows": [
       {
         "title": "CM 월간보고서 자동취합",
@@ -23,7 +31,5 @@
       "csp": "default-src 'self'; connect-src http://localhost:* http://127.0.0.1:* http://192.168.*:* http://10.*:* http://172.16.*:* http://172.17.*:* http://172.18.*:* http://172.19.*:* http://172.20.*:* http://172.21.*:* http://172.22.*:* http://172.23.*:* http://172.24.*:* http://172.25.*:* http://172.26.*:* http://172.27.*:* http://172.28.*:* http://172.29.*:* http://172.30.*:* http://172.31.*:*; style-src 'self' 'unsafe-inline'"
     }
   },
-  "plugins": {
-    "dialog": {}
-  }
+  "plugins": {}
 }

@@ -30,7 +30,6 @@ export function ProfileTab() {
     copyProfile,
     exportProfile,
     importProfile,
-    selectProfile,
     clearError,
   } = useProfileStore();
 

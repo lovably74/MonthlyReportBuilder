@@ -54,7 +54,8 @@ Name: "server"; Description: "CM Report 서버 (데이터베이스 및 API)"; Ty
 Name: "client"; Description: "CM Report 클라이언트 (데스크톱 UI)"; Types: full client
 
 [Tasks]
-Name: "desktopicon"; Description: "바탕화면에 바로가기 생성"; GroupDescription: "추가 아이콘:"; Components: client
+Name: "desktopicon"; Description: "바탕화면에 클라이언트 바로가기 생성"; GroupDescription: "추가 아이콘:"; Components: client
+Name: "desktopicon_server"; Description: "바탕화면에 서버 시작 바로가기 생성"; GroupDescription: "추가 아이콘:"; Components: server
 Name: "autostart_server"; Description: "Windows 시작 시 서버 자동 실행"; GroupDescription: "시작 옵션:"; Components: server
 Name: "firewall"; Description: "Windows 방화벽 규칙 자동 추가 (포트 8741, 5353)"; GroupDescription: "네트워크:"; Components: server; Flags: checkedonce
 
@@ -82,11 +83,12 @@ Name: "{group}\{#MyAppName} 제거"; Filename: "{uninstallexe}"
 
 ; 바탕화면 바로가기
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\client\{#MyAppExeName}"; Tasks: desktopicon; Components: client
+Name: "{commondesktop}\CM Report 서버 시작"; Filename: "{app}\server\start-server.bat"; Tasks: desktopicon_server; Components: server
 
 [Run]
 ; 설치 후 실행 옵션
 Filename: "{app}\client\{#MyAppExeName}"; Description: "CM 월간보고서 자동취합 실행"; Flags: nowait postinstall skipifsilent; Components: client
-Filename: "{app}\server\start-server.bat"; Description: "서버 시작"; Flags: nowait postinstall skipifsilent runhidden; Components: server
+Filename: "{app}\server\start-server.bat"; Description: "서버 시작 (로그 창 표시)"; Flags: nowait postinstall skipifsilent; Components: server
 
 [UninstallRun]
 ; 제거 시 서버 프로세스 종료

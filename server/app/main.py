@@ -20,17 +20,23 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """FastAPI lifespan context manager for startup/shutdown events."""
-    # Startup: register mDNS service
+    import asyncio
+
+    # Startup: auto-create database tables if not exist
+    from app.core.database import Base, engine
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    # Startup: register mDNS service (run in thread to avoid blocking event loop)
     advertiser = get_mdns_advertiser(port=8741, version="0.1.0")
     try:
-        advertiser.start_advertising()
+        await asyncio.to_thread(advertiser.start_advertising)
     except DuplicateServerError as e:
         logger.error(
             "Cannot start server: %s. "
             "Another CM Report Server is already running on this network.",
             e,
         )
-        # Log warning but don't prevent server startup - allow graceful handling
         logger.warning(
             "Server will start without mDNS advertisement due to duplicate detection."
         )
